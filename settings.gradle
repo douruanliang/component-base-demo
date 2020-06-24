@@ -1,2 +1,3 @@
 include ':app', ':lib-base', ':m-login', ':lib-https'
 rootProject.name='component-base-demo'
+include ':app:m-user'

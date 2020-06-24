@@ -102,7 +102,6 @@ public class HttpApiBase {
         //更具不同业务进行替换
         retrofitBuilder.addCallAdapterFactory(new BaseCallAdapterFactory2());
         retrofitBuilder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
-
         mClient = builder.build();
         //组装
         RetrofitManager.get().initRetrofit(retrofitBuilder, mClient);
