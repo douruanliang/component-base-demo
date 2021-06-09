@@ -29,11 +29,12 @@ public class BaseCallAdapterFactory2 extends CallAdapter.Factory {
 
     @Override
     public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
-
+        //<> 尖括号外面的类型 --参数化类型
         if (getRawType(returnType) != ImCall.class) {
             return null;
         }
 
+        //参数化类型 ParameterizedType
         if (!(returnType instanceof ParameterizedType)) {
             throw new IllegalStateException(
                     " U Call must have generic type (e.g., Call<ResponseBody>)");
