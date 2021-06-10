@@ -60,7 +60,7 @@ public class BaseCallAdapterFactory extends CallAdapter.Factory {
 
         @Override
         public BaseCall<R> adapt(@NonNull Call<R> call) {
-            return new InternalCallAdapter<>(call, callbackExecutor);
+            return new InternalCall<>(call, callbackExecutor);
         }
 
     }
@@ -76,15 +76,19 @@ public class BaseCallAdapterFactory extends CallAdapter.Factory {
      * Adapts a {@link Call} to {@link BaseCall}.
      */
     @SuppressWarnings("CloneDoesntCallSuperClone")
-    private static class InternalCallAdapter<T> implements BaseCall<T> {
+    private static class InternalCall<T> implements ImCall<T> {
         private final Call<T> call;
         private final Executor callbackExecutor;
 
-        InternalCallAdapter(Call<T> call, Executor callbackExecutor) {
+        InternalCall(Call<T> call, Executor callbackExecutor) {
             this.call = call;
             this.callbackExecutor = callbackExecutor;
         }
 
+        @Override
+        public Call<T> getCall() {
+            return call;
+        }
         @Override
         public void cancel() {
             call.cancel();
@@ -190,7 +194,9 @@ public class BaseCallAdapterFactory extends CallAdapter.Factory {
 
         @Override
         public BaseCall<T> clone() {
-            return new InternalCallAdapter<>(call.clone(), callbackExecutor);
+            return new InternalCall<>(call.clone(), callbackExecutor);
         }
+
+
     }
 }
