@@ -39,6 +39,7 @@ public class BaseCallAdapterFactory2 extends CallAdapter.Factory {
             throw new IllegalStateException(
                     " U Call must have generic type (e.g., Call<ResponseBody>)");
         }
+        // 这里根据returnType获取到里面的参数化类型的type
         Type responseType = getParameterUpperBound(0, (ParameterizedType) returnType);
         Executor callbackExecutor = retrofit.callbackExecutor();
         return new LiveCallAdapter<>(responseType, callbackExecutor);
